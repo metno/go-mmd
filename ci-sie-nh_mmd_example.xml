@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<mmd:mmd xmlns:mmd="http://www.met.no/schema/mmd">
+  <mmd:metadata_identifier>e8b2e2f5-b469-5ffa-986f-cd3e336db5b1</mmd:metadata_identifier>
+  <mmd:metadata_status>active</mmd:metadata_status>
+  <mmd:collection>ADC</mmd:collection>
+  <mmd:collection>SIOS</mmd:collection>
+  <mmd:collection>CC</mmd:collection>
+  <mmd:collection>NSDN</mmd:collection>
+  <mmd:title xml:lang="en">Sea Ice Extent</mmd:title>
+  <mmd:abstract xml:lang="en">Arctic Sea Ice Extent estimates based upon EUMETSAT Ocean and Sea Ice SAF 
+products. Both reprocessed and operational datasets have been used. See 
+http://cryoclim.met.no/indicators/seaiceextent/ for details. </mmd:abstract>
+  <mmd:related_information>
+    <mmd:type>Dataset landing page</mmd:type>
+    <mmd:description/>
+    <mmd:resource>http://thredds.met.no/thredds/catalog/metusers/steingod/catalog.html?dataset=metusers/steingod/ci-sie-nh_osisaf_monthly_mean_sie.nc</mmd:resource>
+  </mmd:related_information>
+  <mmd:last_metadata_update>2013-10-30T08:09:59Z</mmd:last_metadata_update>
+  <mmd:dataset_production_status>Complete</mmd:dataset_production_status>
+  <mmd:dataset_language>en</mmd:dataset_language>
+  <mmd:iso_topic_category>climatologyMeteorologyAtmosphere</mmd:iso_topic_category>
+  <mmd:iso_topic_category>oceans</mmd:iso_topic_category>
+  <mmd:project>
+    <mmd:short_name/>
+    <mmd:long_name>CryoClim</mmd:long_name>
+  </mmd:project>
+  <mmd:activity_type>Climate indicator</mmd:activity_type>
+  <mmd:platform>
+    <mmd:short_name/>
+    <mmd:long_name>Not available</mmd:long_name>
+  </mmd:platform>
+  <mmd:keywords vocabulary="CF">
+    <mmd:keyword>Climate</mmd:keyword>
+    <mmd:keyword>Sea Ice</mmd:keyword>
+    <mmd:keyword>Oceanography</mmd:keyword>
+    <mmd:keyword>Sea Ice Extent</mmd:keyword>
+    <mmd:keyword>Meteorology</mmd:keyword>
+    <mmd:keyword>Remote Sensing</mmd:keyword>
+  </mmd:keywords>
+  <mmd:keywords vocabulary="gcmd">
+    <mmd:keyword>Cryosphere &gt; Sea Ice &gt; Sea Ice Extent</mmd:keyword>
+    <mmd:keyword>Geographic Region &gt; Northern Hemisphere</mmd:keyword>
+    <mmd:keyword>Oceans &gt; Sea Ice &gt; Sea Ice Extent</mmd:keyword>
+    <mmd:keyword>Vertical Location &gt; Sea Surface</mmd:keyword>
+    <mmd:keyword>EUMETSAT/OSISAF &gt; Satellite Application Facility on Ocean and Sea Ice, European Organisation for the Exploitation of Meteorological Satellites</mmd:keyword>
+  </mmd:keywords>
+  <mmd:temporal_extent>
+    <mmd:start_date>1978-11-16</mmd:start_date>
+    <mmd:end_date>2013-09-16</mmd:end_date>
+  </mmd:temporal_extent>
+  <mmd:geographic_extent>
+    <mmd:rectangle srsName="EPSG:4326">
+      <mmd:north>90</mmd:north>
+      <mmd:south>31.0394496917725</mmd:south>
+      <mmd:west>-180</mmd:west>
+      <mmd:east>180</mmd:east>
+    </mmd:rectangle>
+  </mmd:geographic_extent>
+  <mmd:personnel>
+    <mmd:role>Investigator</mmd:role>
+    <mmd:name>Thomas Lavergne, Mari Anne Killie</mmd:name>
+    <mmd:email>t.lavergne@met.no</mmd:email>
+    <mmd:phone/>
+    <mmd:fax/>
+    <mmd:organisation>Norwegian Meteorological Institute</mmd:organisation>
+  </mmd:personnel>
+  <mmd:data_access>
+    <mmd:type>HTTP</mmd:type>
+    <mmd:description/>
+    <mmd:resource>http://thredds.met.no/thredds/fileServer/metusers/steingod/ci-sie-nh_osisaf_monthly_mean_sie.nc</mmd:resource>
+  </mmd:data_access>
+  <mmd:data_access>
+    <mmd:type>OPeNDAP</mmd:type>
+    <mmd:description/>
+    <mmd:resource>http://thredds.met.no/thredds/dodsC/metusers/steingod/ci-sie-nh_osisaf_monthly_mean_sie.nc</mmd:resource>
+  </mmd:data_access>
+  <mmd:access_constraint>Free</mmd:access_constraint>
+  <!--
+  <mmd:data_access>
+    <mmd:type>OGC WMS</mmd:type>
+    <mmd:description/>
+    <mmd:resource/>
+    <mmd:wms_layers/>
+  </mmd:data_access>
+-->
+  <mmd:related_dataset mmd:relation_type="parent"/>
+</mmd:mmd>
