@@ -5,34 +5,64 @@ import "encoding/xml"
 // MetadataMMD is struct defining the MMD format.
 // Use for marshalling. For unmarshalling we need separate structs to handle namespaces properly.
 type MetadataMMD struct {
-	XMLName                 xml.Name              `xml:"mmd:mmd"`
-	Title                   MMDTitle              `json:"title" xml:"mmd:title"`
-	Abstract                MMDAbstract           `json:"abstract" xml:"mmd:abstract"`
-	LastMetadataUpdate      string                `json:"last_metadata_update" xml:"mmd:last_metadata_update"`
-	Keywords                MMDKeywords           `json:"keywords" xml:"mmd:keywords"`
-	MetadataIdentifier      string                `json:"metadata_identifier" xml:"mmd:metadata_identifier"`
-	Collections             []string              `xml:"mmd:collection"`
-	MetadataStatus          string                `xml:"mmd:metadata_status"`
-	TemporalExtent          TemporalExtent        `xml:"mmd:temporal_extent"`
-	GeographicExtent        GeographicExtent      `xml:"mmd:geographic_extent"`
-	DatasetProductionStatus string                `xml:"mmd:dataset_production_status"`
-	DatasetLanguage         string                `xml:"mmd:dataset_language"`
-	OperationalStatus       string                `xml:"mmd:operational_status"`
-	AccessConstraint        string                `xml:"mmd:access_constraint"`
-	DataCenter              MMDDataCenter         `xml:"mmd:data_center"`
-	DataAccess              MMDDataAccess         `xml:"mmd:data_access"`
-	RelatedDataset          MMDRelatedDataset     `xml:"mmd:related_dataset"`
-	RelatedInformation      MMDRelatedInformation `xml:"mmd:related_information"`
-	ISOTopicCategories      []string              `xml:"mmd:mmd>mmd:iso_topic_category"`
-	Project                 MMDShortLongName      `xml:"mmd:project"`
-	Platform                MMDShortLongName      `xml:"mmd:platform"`
-	Instrument              MMDShortLongName      `xml:"mmd:instrument"`
-	ActivityType            []string              `xml:"mmd:mmd>mmd:activity_type"`
+	XMLName                 xml.Name              `xml:"mmd"`
+	Title                   MMDTitle              `xml:"title"`
+	Abstract                MMDAbstract           `xml:"abstract"`
+	LastMetadataUpdate      string                `xml:"last_metadata_update"`
+	Keywords                []MMDKeywords         `xml:"keywords"`
+	MetadataIdentifier      string                `xml:"metadata_identifier"`
+	Collections             []string              `xml:"collection"`
+	MetadataStatus          string                `xml:"metadata_status"`
+	TemporalExtent          TemporalExtent        `xml:"temporal_extent"`
+	GeographicExtent        GeographicExtent      `xml:"geographic_extent"`
+	DatasetProductionStatus string                `xml:"dataset_production_status"`
+	DatasetLanguage         string                `xml:"dataset_language"`
+	OperationalStatus       string                `xml:"operational_status"`
+	AccessConstraint        string                `xml:"access_constraint"`
+	DataCenter              MMDDataCenter         `xml:"data_center"`
+	DataAccess              []MMDDataAccess       `xml:"data_access"`
+	RelatedDataset          MMDRelatedDataset     `xml:"related_dataset"`
+	RelatedInformation      MMDRelatedInformation `xml:"related_information"`
+	ISOTopicCategories      []string              `xml:"iso_topic_category"`
+	Project                 MMDShortLongName      `xml:"project"`
+	Platform                MMDShortLongName      `xml:"platform"`
+	Instrument              MMDShortLongName      `xml:"instrument"`
+	ActivityType            []string              `xml:"activity_type"`
+	StorageInformation      StorageInformation    `xml:"storage_information"`
+	DatasetCitation         []DatasetCitation     `xml:"dataset_citation"`
+	UseConstraint           UseConstraint         `xml:"use_constraint"`
+	SpatialRepresentation   string                `xml:"spatial_representation"`
+}
+
+type UseConstraint struct {
+	Identifier string `xml:"identifier"`
+	Resource   string `xml:"resource"`
+}
+
+type Personnel struct {
+	Role         string `xml:"role"`
+	Name         string `xml:"name"`
+	Email        string `xml:"email"`
+	Organisation string `xml:"organisation"`
+}
+
+type DatasetCitation struct {
+	Author          string `xml:"auth"`
+	PublicationDate string `xml:"publication_date"`
+	Title           string `xml:"title"`
+}
+
+type StorageInformation struct {
+	FileName     string  `xml:"file_name"`
+	FileLocation string  `xml:"file_location"`
+	FileFormat   string  `xml:"file_format"`
+	FileSize     float64 `xml:"file_size"`
 }
 
 type MMDKeywords struct {
 	Vocabulary string   `xml:"vocabulary,attr"`
-	Keyword    []string `xml:"mmd:keyword"`
+	Keyword    []string `xml:"keyword"`
+	Resource   string   `xml:"resource"`
 }
 type MMDTitle struct {
 	Language string `xml:"xml:lang,attr"`
@@ -44,32 +74,31 @@ type MMDAbstract struct {
 }
 
 type TemporalExtent struct {
-	StartDate string `xml:"mmd:start_date"`
-	EndDate   string `xml:"mmd:end_date"`
+	StartDate string `xml:"start_date"`
+	EndDate   string `xml:"end_date"`
 }
 
 type GeographicExtent struct {
-	Rectangle Rectangle `xml:"mmd:rectangle"`
+	Rectangle Rectangle `xml:"rectangle"`
 }
 type Rectangle struct {
 	SrsName string  `xml:"srsName,attr"`
-	North   float32 `xml:"mmd:north"`
-	South   float32 `xml:"mmd:south"`
-	West    float32 `xml:"mmd:west"`
-	East    float32 `xml:"mmd:east"`
+	North   float32 `xml:"north"`
+	South   float32 `xml:"south"`
+	West    float32 `xml:"west"`
+	East    float32 `xml:"east"`
 }
 
 type MMDDataCenter struct {
-	DataCenterName MMDShortLongName `xml:"mmd:data_center_name"`
-	DataCenterURL  string           `xml:"mmd:data_center_url"`
-	DatasetID      string           `xml:"mmd:dataset_id"`
+	DataCenterName MMDShortLongName `xml:"data_center_name"`
+	DataCenterURL  string           `xml:"data_center_url"`
+	DatasetID      string           `xml:"dataset_id"`
 }
 
 type MMDDataAccess struct {
-	Type        string   `xml:"mmd:type"`
-	Resource    string   `xml:"mmd:resource"`
-	Description string   `xml:"mmd:description"`
-	WMSLayers   []string `xml:"mmd:mmd>mmd:wms_layers>mmd:wms_layer"`
+	Type        string `xml:"type"`
+	Resource    string `xml:"resource"`
+	Description string `xml:"description"`
 }
 
 type MMDRelatedDataset struct {
@@ -78,8 +107,9 @@ type MMDRelatedDataset struct {
 }
 
 type MMDRelatedInformation struct {
-	Type     string `xml:"type"`
-	Resource string `xml:"resource"`
+	Type        string `xml:"type"`
+	Description string `xml:"description"`
+	Resource    string `xml:"resource"`
 }
 
 type MMDShortLongName struct {
