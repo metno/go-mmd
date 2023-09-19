@@ -2,14 +2,15 @@ package mmd
 
 import (
 	"encoding/xml"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestMMDDecoding(t *testing.T) {
-	var metadata MetadataMMD
-	err := xml.Unmarshal([]byte(mmdAromeArctic), &metadata)
+	var metadata DecodeMetadataMMD
+	err := xml.Unmarshal([]byte(mmdAromeArcticEncoded), &metadata)
 	require.Nil(t, err)
 
 	require.Equal(t, "Arome-Arctic 2.5Km deterministic 2023-08-10T06:00:00Z + 66 hours", metadata.Title.Title)
@@ -32,7 +33,16 @@ func TestMMDDecoding(t *testing.T) {
 	require.True(t, keywordFound)
 }
 
-var mmdAromeArctic = `
+func TestMMDEncoding(t *testing.T) {
+	encoded, err := xml.Marshal(MMDExample)
+	require.Nil(t, err)
+
+	require.Contains(t, string(encoded), fmt.Sprintf("<mmd:title xml:lang=%q>Arome Arctic", "en"))
+	require.Contains(t, string(encoded),
+		"<mmd:data_center><mmd:data_center_name><mmd:short_name>MET Norway</mmd:short_name><mmd:long_name>Norwegian Meteorological Institute</mmd:long_name></mmd:data_center_name><mmd:data_center_url>https://data.met.no</mmd:data_center_url></mmd:data_center>")
+}
+
+var mmdAromeArcticEncoded = `
 <?xml version="1.0"?>
 <mmd:mmd xmlns:mmd="http://www.met.no/schema/mmd" xmlns:gml="http://www.opengis.net/gml">
   <mmd:metadata_identifier>no.met:72170bc4-c0e9-4c57-adc9-2fecb1ddfa84</mmd:metadata_identifier>
@@ -126,3 +136,17 @@ var mmdAromeArctic = `
   </mmd:dataset_citation>
 </mmd:mmd>
 `
+
+var MMDExample = MetadataMMD{
+	Title: &MMDTitle{
+		Title:    "Arome Arctic",
+		Language: "en",
+	},
+	DataCenter: &MMDDataCenter{
+		DataCenterName: MMDShortLongName{
+			ShortName: "MET Norway",
+			LongName:  "Norwegian Meteorological Institute",
+		},
+		DataCenterURL: "https://data.met.no",
+	},
+}
